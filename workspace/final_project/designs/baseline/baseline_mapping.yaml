@@ -1,0 +1,96 @@
+mapping:
+- target: DRAM
+  factors: 
+  - M={{DRAM_factor_M}}
+  - N={{DRAM_factor_N}}
+  - K={{DRAM_factor_K}}
+  permutation: {{DRAM_permutation}}
+  type: temporal
+
+- target: ClusterArray
+  type: spatial 
+  factors: 
+  - M={{ClusterArray_factor_M}}
+  - N={{ClusterArray_factor_N}}
+  - K={{ClusterArray_factor_K}}
+  permutation: {{ClusterArray_permutation}}
+  split: 1
+
+#  GLB Cluster
+- target: GLB_Cluster
+  factors: 
+  - M={{GLB_Cluster_factor_M}}
+  - N={{GLB_Cluster_factor_N}}
+  - K={{GLB_Cluster_factor_K}}
+  permutation: {{GLB_Cluster_permutation}}
+  type: temporal
+
+- target: GLB_Cluster
+  bypass: [Weights]
+  keep: [Inputs, Outputs]
+  type: dataspace
+
+# PE Cluser
+- target: PE_Cluster
+  type: spatial  # spatial constraint specification
+  factors: 
+  - M={{PE_Cluster_factor_M}}
+  - N={{PE_Cluster_factor_N}}
+  - K={{PE_Cluster_factor_K}}
+  permutation: {{PE_Cluster_permutation}}
+  split: 1
+
+# input activations
+- target: iact_spad
+  factors: 
+  - M={{iact_spad_factor_M}}
+  - N={{iact_spad_factor_N}}
+  - K={{iact_spad_factor_K}}
+  permutation: {{iact_spad_permutation}}
+  type: temporal
+
+- target: iact_spad
+  bypass: [Weights, Outputs]
+  keep: [Inputs]
+  type: dataspace
+
+# weights
+- target: weight_spad
+  factors: 
+  - M={{weight_spad_factor_M}}
+  - N={{weight_spad_factor_N}}
+  - K={{weight_spad_factor_K}}
+  permutation: {{weight_spad_permutation}}
+  type: temporal
+  
+- target: weight_spad
+  bypass: [Inputs, Outputs]
+  keep: [Weights]
+  type: dataspace
+
+  # partial sums
+- target: psum_spad
+  factors: 
+  - M={{psum_factor_M}}
+  - N={{psum_factor_N}}
+  - K={{psum_factor_K}}
+  permutation: {{psum_permutation}}
+  type: temporal
+  
+- target: psum_spad
+  bypass: [Inputs, Weights]
+  keep: [Outputs]
+  type: dataspace
+  
+- target: reg
+  factors: 
+  - M={{reg_factor_M}}
+  - N={{reg_factor_N}}
+  - K={{reg_factor_K}}
+  permutation: {{reg_permutation}}
+  type: temporal
+  
+- target: reg
+  bypass: [Weights, Outputs]
+  keep: [Inputs]
+  type: dataspace

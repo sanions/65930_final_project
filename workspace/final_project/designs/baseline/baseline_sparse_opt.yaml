@@ -1,0 +1,91 @@
+sparse_optimizations:
+  targets:
+    - target: DRAM
+      representation_format:
+        data_spaces:
+          - name: Inputs
+            ranks:
+              - format: UOP
+                payload_word_bits: 4
+                flattened_rankIDs: [[M]]
+              - format: RLE
+                metadata_word_bits: 4
+                flattened_rankIDs: [[K]]
+          - name: Weights
+            ranks:
+              - format: UOP
+                payload_word_bits: 0
+              - format: UOP
+                payload_word_bits: 7
+                flattened_rankIDs: [[K]]
+              - format: RLE
+                metadata_word_bits: 4
+                flattened_rankIDs: [[N]]
+
+    - target: glb
+      representation_format:
+        data_spaces:
+          - name: Inputs
+            ranks:
+              - format: UOP
+                payload_word_bits: 0
+                flattened_rankIDs: [[M]]
+              - format: RLE
+                metadata_word_bits: 4
+                flattened_rankIDs: [[K]]
+          - name: Weights
+            ranks:
+              - format: UOP
+                payload_word_bits: 4
+                flattened_rankIDs: [[K]]
+              - format: RLE
+                metadata_word_bits: 4
+                flattened_rankIDs: [[N]]
+
+    - target: iact_spad
+      representation_format:
+        data_spaces:
+          - name: Inputs
+            ranks:
+              - format: UOP
+                payload_word_bits: 4
+                flattened_rankIDs: [[M]]
+              - format: RLE
+                metadata_word_bits: 4
+                flattened_rankIDs: [[K]]
+
+    - target: weight_spad
+      representation_format:
+        data_spaces:
+          - name: Weights
+            ranks:
+              - format: UOP
+                payload_word_bits: 7
+                flattened_rankIDs: [[K]]
+              - format: RLE
+                metadata_word_bits: 4
+                flattened_rankIDs: [[N]]
+      action_optimization:
+        - type: skipping
+          options:
+            - target: Weights
+              condition_on: [Inputs]
+
+    - target: psum_spad
+      action_optimization:
+        - type: skipping
+          options:
+            - target: Outputs
+              condition_on: [Inputs, Weights]
+
+    - target: reg
+      representation_format:
+        data_spaces:
+          - name: Inputs
+            ranks:
+              - format: RLE
+                metadata_word_bits: 4
+
+    - target: MAC
+      compute_optimization:
+        - type: skipping

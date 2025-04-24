@@ -1,0 +1,34 @@
+# Inputs x Weights = Outputs
+# Inputs is of size M x K
+# Weights is of size K x N
+# Outputs is of size M x N
+
+problem:
+  instance:
+    M: 4096
+    K: 4096
+    N: 4096
+    densities: 
+        Weights: 
+            distribution: "fixed_structured"
+            density: {{density_weights}}
+        Inputs: 
+            distribution: "fixed_structured"
+            density: {{density_inputs}}
+  shape:
+    data_spaces:
+    - name: Weights
+      projection:
+      - [[K]]
+      - [[N]]
+    - name: Inputs
+      projection:
+      - [[M]]
+      - [[K]]
+    - name: Outputs
+      projection:
+      - [[M]] 
+      - [[N]]
+      read_write: true
+    dimensions: [M, N, K]
+    name: grouped-CONV

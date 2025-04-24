@@ -1,0 +1,60 @@
+# This file will be converted into a YAML file by Jinja2 templating.
+{{add_to_path(cwd())}}
+{{add_to_path(cwd() ~ '/..')}}
+
+
+# ==============================================================================
+# ARCHITECTURE SPECIFICATION
+# ==============================================================================
+architecture: {{include('arch.yaml', 'architecture')}}
+
+# ==============================================================================
+# TOP-LEVEL VARIABLES
+# ==============================================================================
+variables: # May get overridden by the architecture specification.
+  version: 0.4
+  technology: "SET ME"
+  global_cycle_seconds: 1e-9
+  metadata_datawidth: 1
+# ==============================================================================
+# COMPOUND COMPONENT SPECIFICATION
+# ==============================================================================
+components:
+    version: 0.4
+    classes: {{include_all('./components/*.yaml', 'compound_components.classes')}}
+
+# ==============================================================================
+# PROBLEM SPECIFICATION
+# ==============================================================================
+{% if problem is defined %}
+problem: {{include(problem, 'problem')}}
+{% endif %}
+
+
+# ==============================================================================
+# CONSTRAINTS SPECIFICATION
+# ==============================================================================
+{% if constraints is defined %}
+constraints: {{include(constraints, 'constraints')}}
+{% endif %}
+
+# ==============================================================================
+# MAPPING SPECIFICATION
+# ==============================================================================
+{% if mapping is defined %}
+mapping: {{include(mapping, 'mapping')}}
+{% endif %}
+
+# ==============================================================================
+# MAPPER SPECIFICATION
+# ==============================================================================
+{% if mapper is defined %}
+mapper: {{include(mapper, 'mapper')}}
+{% endif %}
+
+# ==============================================================================
+# SPARSE OPTIMIZATIONS SPECIFICATION
+# ==============================================================================
+{% if sparse_optimizations is defined %}
+sparse_optimizations: {{include(sparse_optimizations, 'sparse_optimizations')}}
+{% endif %}

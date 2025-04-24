@@ -1,0 +1,117 @@
+# sparse config for dense input activations and sparse weights
+sparse_optimizations:
+  targets:
+  - target: DRAM
+    representation_format:
+      data_spaces:
+        - name: Inputs
+          ranks:
+            - format: UOP             # G
+              payload_word_bits:  0
+            - format: UOP             # C1
+              payload_word_bits:  0
+            - format: UOP             # M1
+              payload_word_bits:  0
+            - format: UOP             # C2
+              payload_word_bits:  0
+            - format: UOP             
+              flattened_rankIDs: [ [ S, F ] ]
+              payload_word_bits:  0
+            - format: UOP             
+              flattened_rankIDs: [ [ E, N ] ]
+              payload_word_bits:  0
+            - format: UOP             
+              payload_word_bits:  4
+              flattened_rankIDs: [ [ R ] ] 
+            - format: RLE             
+              metadata_word_bits: 4
+              flattened_rankIDs: [ [ C ] ] 
+          # rank_application_order: inner-to-outer
+        - name: Weights
+          ranks:
+            - format: UOP            # G
+              payload_word_bits:  0
+            - format: UOP            # M
+              payload_word_bits:  0
+            - format: UOP            # S  
+              payload_word_bits:  0      
+            - format: UOP            # M
+              payload_word_bits:  0         
+            - format: UOP
+              payload_word_bits:  7
+              flattened_rankIDs: [ [ C, R ] ] 
+            - format: RLE
+              metadata_word_bits: 4
+              flattened_rankIDs: [ [ M  ] ]
+          # rank_application_order: inner-to-outer
+
+  - target: glb
+    representation_format:
+      data_spaces:
+        - name: Inputs
+          ranks:
+            - format: UOP             # C1
+              payload_word_bits:  0
+            - format: RLE             
+              metadata_word_bits: 4
+              flattened_rankIDs: [ [ C ] ] 
+        - name: Weights
+          ranks:          
+            - format: UOP
+              payload_word_bits:  4
+              flattened_rankIDs: [ [ C, R ] ] 
+            - format: RLE
+              metadata_word_bits: 4
+              flattened_rankIDs: [ [ M  ] ]
+
+  - target: iact_spad
+    representation_format:
+      data_spaces:
+        - name: Inputs
+          ranks: 
+            - format: UOP             
+              payload_word_bits:  4
+              flattened_rankIDs: [ [ R ] ] 
+            - format: RLE             # C0
+              metadata_word_bits: 4
+              flattened_rankIDs: [ [ C ] ] 
+          # rank_application_order: inner-to-outer
+  
+  - target: weight_spad
+    representation_format:
+      data_spaces:
+        - name: Weights
+          ranks:
+            - format: UOP
+              payload_word_bits:  7
+              flattened_rankIDs: [ [ C, R ] ] 
+            - format: RLE
+              metadata_word_bits: 4
+              flattened_rankIDs: [ [ M  ] ]
+          # rank_application_order: inner-to-outer
+    action_optimization:
+      - type: skipping
+        options:
+          - target: Weights
+            condition_on: [ Inputs ]
+
+  - target: psum_spad
+    action_optimization:
+      - type: skipping
+        options:
+          - target: Outputs
+            condition_on: [ Inputs, Weights ]
+          
+  - target: reg
+    representation_format:
+      data_spaces:
+        - name: Inputs
+          ranks: 
+            - format: RLE
+              metadata_word_bits: 4
+          # rank_application_order: inner-to-outer
+
+  - target: MAC
+    compute_optimization:
+    - type: skipping
+

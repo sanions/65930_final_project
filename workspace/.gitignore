@@ -1,0 +1,8 @@
+.cache
+.config
+.ipython
+.jupyter
+.local
+
+.bashrc
+.profile
