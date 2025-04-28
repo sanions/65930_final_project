@@ -6,6 +6,10 @@ sparse_optimizations:
           - name: Inputs
             ranks:
               - format: UOP
+                payload_word_bits: 0
+              - format: UOP
+                payload_word_bits: 0
+              - format: UOP
                 payload_word_bits: 4
                 flattened_rankIDs: [[M]]
               - format: RLE
@@ -27,6 +31,8 @@ sparse_optimizations:
         data_spaces:
           - name: Inputs
             ranks:
+              - format: UOP
+                payload_word_bits: 0
               - format: UOP
                 payload_word_bits: 0
                 flattened_rankIDs: [[M]]

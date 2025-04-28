@@ -5,9 +5,9 @@
 
 problem:
   instance:
-    M: 4096
-    K: 4096
-    N: 4096
+    M: {{matrix_size_M_dim}}
+    K: {{matrix_size_K_dim}}
+    N: {{matrix_size_N_dim}}
     densities: 
         Weights: 
             distribution: "fixed_structured"

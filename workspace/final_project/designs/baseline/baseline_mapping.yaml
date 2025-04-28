@@ -30,6 +30,15 @@ mapping:
   keep: [Inputs, Outputs]
   type: dataspace
 
+- target: glb
+  type: spatial  # spatial constraint specification
+  factors: 
+  - M={{glb_factor_M}}
+  - N={{glb_factor_N}}
+  - K={{glb_factor_K}}
+  permutation: {{glb_permutation}}
+  split: 1
+
 # PE Cluser
 - target: PE_Cluster
   type: spatial  # spatial constraint specification
