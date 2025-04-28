@@ -1,0 +1,36 @@
+# Inputs x Weights = Outputs
+# Inputs is of size M x K
+# Weights is of size K x N
+# Outputs is of size M x N
+
+# This only deals with one quadrant of the matrix so Inputs => M/2 x K/2, etc.
+
+problem:
+  instance:
+    M: 2048
+    K: 2048
+    N: 2048
+    densities: 
+        Weights: 
+            distribution: "fixed_structured"
+            density: {{density_weights}} 
+        Inputs: 
+            distribution: "fixed_structured"
+            density: {{density_inputs}} # For dense Q: 1, for diaganol Q's: 0.5, for zeros Q: 0
+  shape:
+    data_spaces:
+    - name: Weights
+      projection:
+      - [[K]]
+      - [[N]]
+    - name: Inputs
+      projection:
+      - [[M]]
+      - [[K]]
+    - name: Outputs
+      projection:
+      - [[M]] 
+      - [[N]]
+      read_write: true
+    dimensions: [M, N, K]
+    name: grouped-CONV
