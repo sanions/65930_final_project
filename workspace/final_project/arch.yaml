@@ -23,26 +23,26 @@ architecture:
           name: ClusterArray
           spatial: {meshX: 8, meshY: 2}
 
-        - !Hierarchical
-          nodes:
-            - !Container
-              name: GLB_Cluster
-              # spatial: {meshX: 1, meshY: 1}
+        # - !Hierarchical
+        #   nodes:
+        #     - !Container
+        #       name: GLB_Cluster
+        #       # spatial: {meshX: 1, meshY: 1}
 
-            - !Component
-              name: glb
-              class: storage
-              subclass: SRAM
-              spatial: {meshX: 7}
-              attributes:
-                data_storage_depth: 16
-                data_storage_width: 8
-                metadata_storage_depth: 25
-                metadata_storage_width: 4
-                depth: 1728
-                width: 8
-                datawidth: 8
-                block_size: 1
+        #     - !Component
+        #       name: glb
+        #       class: storage
+        #       subclass: SRAM
+        #       # spatial: {meshX: 8}
+        #       attributes:
+        #         data_storage_depth: 16
+        #         data_storage_width: 8
+        #         metadata_storage_depth: 25
+        #         metadata_storage_width: 4
+        #         depth: 1728
+        #         width: 8
+        #         datawidth: 8
+        #         block_size: 1
 
         - !Hierarchical
           nodes:
