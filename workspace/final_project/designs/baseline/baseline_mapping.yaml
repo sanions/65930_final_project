@@ -16,40 +16,9 @@ mapping:
   permutation: {{ClusterArray_permutation}}
   split: 1
 
-#  GLB Cluster
-# - target: GLB_Cluster
-#   factors: 
-#   - M={{GLB_Cluster_factor_M}}
-#   - N={{GLB_Cluster_factor_N}}
-#   - K={{GLB_Cluster_factor_K}}
-#   permutation: {{GLB_Cluster_permutation}}
-#   type: temporal
-
-# - target: GLB_Cluster
-#   bypass: [Weights]
-#   keep: [Inputs, Outputs]
-#   type: dataspace
-
-# - target: glb
-#   type: spatial  # spatial constraint specification
-#   factors: 
-#   - M={{glb_factor_M}}
-#   - N={{glb_factor_N}}
-#   - K={{glb_factor_K}}
-#   permutation: {{glb_permutation}}
-#   split: 1
-
-# - target: glb
-#   type: temporal
-#   factors:
-#   - M=1
-#   - N=1
-#   - K=1
-#   permutation: [M, N, K]
-
 # PE Cluster
 - target: PE_Cluster
-  type: spatial  # spatial constraint specification
+  type: spatial 
   factors: 
   - M={{PE_Cluster_factor_M}}
   - N={{PE_Cluster_factor_N}}

@@ -27,18 +27,18 @@ architecture:
         #   nodes:
         #     - !Container
         #       name: GLB_Cluster
-        #       # spatial: {meshX: 1, meshY: 1}
+        #       spatial: {meshX: 1, meshY: 1}
 
         #     - !Component
         #       name: glb
         #       class: storage
         #       subclass: SRAM
-        #       # spatial: {meshX: 8}
+        #       spatial: {meshX: 8}
         #       attributes:
         #         data_storage_depth: 16
         #         data_storage_width: 8
-        #         metadata_storage_depth: 25
-        #         metadata_storage_width: 4
+        #         metadata_storage_depth: 16
+        #         metadata_storage_width: 8
         #         depth: 1728
         #         width: 8
         #         datawidth: 8
@@ -66,8 +66,8 @@ architecture:
                           attributes:
                             data_storage_depth: 16
                             data_storage_width: 8
-                            metadata_storage_depth: 25
-                            metadata_storage_width: 4
+                            metadata_storage_depth: 16
+                            metadata_storage_width: 8
                             datawidth: 8
                             block_size: 1
                         - !Component
@@ -77,7 +77,7 @@ architecture:
                           attributes:
                             data_storage_depth: 192
                             data_storage_width: 8
-                            metadata_storage_depth: 128
+                            metadata_storage_depth: 192
                             metadata_storage_width: 8
                             datawidth: 8
                             block_size: 1
