@@ -1,6 +1,6 @@
 {
-  "total_energy_uJ": 705903.7100000001,
+  "total_energy_uJ": 708514.05,
   "utilization_percent": 0.39,
   "computes_per_cycle": 1.0,
-  "memory_traffic": 145000646049
+  "memory_traffic": 142289447943
 }
