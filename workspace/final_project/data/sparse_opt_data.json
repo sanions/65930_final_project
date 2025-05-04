@@ -1,0 +1,14 @@
+{
+    "COO": {
+        "total_energy_uJ": 708267.08,
+        "utilization_percent": 0.39,
+        "computes_per_cycle": 1.0,
+        "memory_traffic": 155774571510
+    },
+    "CSR": {
+        "total_energy_uJ": 708514.05,
+        "utilization_percent": 0.39,
+        "computes_per_cycle": 1.0,
+        "memory_traffic": 155774571510
+    }
+}

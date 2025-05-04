@@ -18,6 +18,14 @@ sparse_optimizations:
               - format: UOP
                 payload_word_bits: 0
               - format: UOP
+                payload_word_bits: 0
+              - format: UOP
+                payload_word_bits: 0
+              - format: UOP
+                payload_word_bits: 0
+              - format: UOP
+                payload_word_bits: 0
+              - format: UOP
                 payload_word_bits: 4
                 flattened_rankIDs: [[M]]
               - format: RLE
@@ -25,6 +33,14 @@ sparse_optimizations:
                 flattened_rankIDs: [[K]]
           - name: Weights
             ranks:
+              - format: UOP
+                payload_word_bits: 0
+              - format: UOP
+                payload_word_bits: 0
+              - format: UOP
+                payload_word_bits: 0
+              - format: UOP
+                payload_word_bits: 0
               - format: UOP
                 payload_word_bits: 0
               - format: UOP
