@@ -5,6 +5,11 @@ sparse_optimizations:
       data_spaces:
       - name: Weights
         ranks:    
+        - format: UOP
+
+        - format: UOP
+        - format: UOP
+        
         - format: UOP # uncompressed offset pair
         - format: UOP # uncompressed offset pair
         
@@ -21,6 +26,11 @@ sparse_optimizations:
           metadata_word_bits: 4
       - name: Inputs         
         ranks:
+        - format: UOP
+        
+        - format: UOP
+        - format: UOP
+        
         - format: UOP # uncompressed offset pair
         - format: UOP # uncompressed offset pair
         

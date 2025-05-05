@@ -4,7 +4,9 @@ sparse_optimizations:
     representation_format:
       data_spaces:
       - name: Weights
-        ranks:      
+        ranks:   
+        - format: CP 
+        
         - format: CP # coordinate payload
         - format: CP # coordinate payload
         
@@ -23,6 +25,11 @@ sparse_optimizations:
           
       - name: Inputs        
         ranks:
+        - format: CP
+        
+        - format: CP
+        - format: CP
+        
         - format: CP
         - format: CP
         
